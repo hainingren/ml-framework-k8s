@@ -1,6 +1,7 @@
 import pandas as pd
 from typing import Tuple
 import logging
+logger = logging.getLogger(__name__)
 class DataLoader:
     def __init__(self, customers_file: str, noncustomers_file: str, actions_file: str):
         """
@@ -24,7 +25,7 @@ class DataLoader:
         logger.info(f"Loading non-customers data from {self.noncustomers_file}")
         noncustomers = pd.read_csv(self.noncustomers_file)
         logger.info(f"Loaded {len(noncustomers)} non-customer records.")
-        
+
         logger.info(f"Loading actions data from {self.actions_file}")
         actions = pd.read_csv(self.actions_file)
         logger.info(f"Loaded {len(actions)} action records.")
