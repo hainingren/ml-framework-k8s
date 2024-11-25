@@ -97,34 +97,61 @@ Training a model involves preparing your environment, configuring the training p
    pip install -r requirements.txt
 
    ```
-3. **Build the Docker image**
-	```bash 
-	docker build -t ml-framework-api .
-	```
-4. **(Optional) Deploy to Kubernetes** 
+3. **Prepares the data**
+   Organize Data Files
+   Ensure that your data files (customers.csv, noncustomers.csv, actions.csv) are placed in the data/ directory.
 
+   Understand the DataLoader
 
-5. **Training a model**
+   The data/loader.py script is responsible for loading and preprocessing the data. Ensure that it correctly reads your CSV files and combines them as needed. (Currently:
+   1. It is set to take average action metrics up to the date before conversion.
+   2. Dummy Variables are used to process categorical variables. )
+
+4. **Training the model**
     ```bash
     python model_training.py --config config.yaml
     ```
- 
+    Output:
 
-## 2. Usage Accessing the /predict Endpoint 
+    The script will print logs indicating the progress through data loading, preprocessing, training, evaluation, and saving the model.
+5. **Verify the Model Artifacts**
+	Check the artifacts/ Directory
+    After successful training, the trained model file should be saved in the artifacts/ directory. For example:
 
-6.  **Run the Docker Container**
+    Logistic Regression: artifacts/logistic_regression_model.pkl
+    TensorFlow: artifacts/tensorflow_model.h5
+    Hugging Face: artifacts/huggingface_model/
 
-Run the Docker container, mapping the container's port to a port on   your host machine:
-   ```bash
-   docker run --privileged -p 8000:8000 ml-framework:latest
-   ```
-
-Calling the predict end point with the company id for results:
-
-    ```bash
-     curl -X POST "http://localhost:8000/predict/" \
-	 -H "Content-Type: application/json" \
-	 -d '{"ids": [199, 147]}'
+## 2. Testing On Docker
+3. **Build the Docker image**
+	```bash 
+	docker build -t ml-framework:latest .
 	```
 
+4. **(Optional) Deploy to Kubernetes** 
 
+
+6. **Run the Docker Container**
+
+	Run the Docker container, mapping the container's port to a port on   your host machine:
+    ```bash
+    docker run --privileged -p 8000:8000 ml-framework:latest
+    ```
+7. **Test the API Endpoints** 
+
+	Calling the predict endpoint with the company id for results:
+    ```bash
+
+    curl -X POST "http://localhost:8000/predict/" \
+	-H "Content-Type: application/json" \
+	-d '{"ids": [199, 147]}'
+	``` 
+## Troubleshooting
+Error: ModuleNotFoundError: No module named 'data'
+
+Cause: Python cannot locate the data module due to incorrect project structure or Python path.
+
+Solution:
+
+Ensure data/ directory exists and contains an __init__.py file.
+Verify you're running the script from the project root.
