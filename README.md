@@ -43,6 +43,7 @@ Additionally, make sure you have access to the project's repository and necessar
 ## Project Structure
 
 Here's the project structure tree
+```bash
 
 ml-framework-k8s/
 ├── artifacts/
@@ -74,7 +75,7 @@ ml-framework-k8s/
 ├── Dockerfile
 ├── requirements.txt
 └── README.md
-
+```
 ---
 
 ## 1. Training a Model
@@ -97,9 +98,9 @@ Training a model involves preparing your environment, configuring the training p
 
    ```
 3. **Build the Docker image**
-```bash 
-docker build -t ml-framework-api .
-```
+	```bash 
+	docker build -t ml-framework-api .
+	```
 4. **(Optional) Deploy to Kubernetes** 
 
 
@@ -118,6 +119,7 @@ Run the Docker container, mapping the container's port to a port on   your host 
    docker run --privileged -p 8000:8000 ml-framework:latest
    ```
 
+Calling the predict end point with the company id for results:
 
     ```bash
      curl -X POST "http://localhost:8000/predict/" \
