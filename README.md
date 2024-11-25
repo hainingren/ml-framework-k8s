@@ -42,9 +42,38 @@ Additionally, make sure you have access to the project's repository and necessar
 
 ## Project Structure
 
-Understanding the project structure helps in navigating the files and directories efficiently.
+Here's the project structure tree
 
-ml-framework-k8s/ ├── artifacts/ │ └── (model files will be saved here) ├── api/ │ ├── app.py │ └── init.py ├── data/ │ ├── customers.csv │ ├── noncustomers.csv │ ├── actions.csv │ └── loader.py ├── models/ │ ├── init.py │ ├── base_model.py │ ├── registry.py │ ├── sklearn_logistic_model.py │ ├── tensorflow_model.py │ └── huggingface_model.py ├── preprocess/ │ ├── init.py │ ├── base_preprocessor.py │ ├── registry.py │ ├── numeric_preprocessor.py │ ├── huggingface_preprocessor.py │ └── tree_preprocessor.py ├── model_training.py ├── config.yaml ├── Dockerfile ├── requirements.txt └── README.md
+ml-framework-k8s/
+├── artifacts/
+│   └── (some examples saved here)
+├── api/
+│   ├── app.py
+│   └── __init__.py
+├── data/
+│   ├── customers.csv
+│   ├── noncustomers.csv
+│   ├── actions.csv
+│   └── loader.py
+├── models/
+│   ├── __init__.py
+│   ├── base_model.py
+│   ├── registry.py
+│   ├── sklearn_logistic_model.py
+│   ├── tensorflow_model.py
+│   └── huggingface_model.py
+├── preprocess/
+│   ├── __init__.py
+│   ├── base_preprocessor.py
+│   ├── registry.py
+│   ├── numeric_preprocessor.py
+│   ├── huggingface_preprocessor.py
+│   └── tree_preprocessor.py
+├── model_training.py
+├── config.yaml
+├── Dockerfile
+├── requirements.txt
+└── README.md
 
 ---
 
@@ -61,20 +90,38 @@ Training a model involves preparing your environment, configuring the training p
    ```bash
    git clone https://github.com/yourusername/ml-framework-k8s.git
    cd ml-framework-k8s
+   ```
+2. **Install Dependencies**
+   ```bash 
+   pip install -r requirements.txt
 
----
+   ```
+3. **Build the Docker image**
+```bash 
+docker build -t ml-framework-api .
+```
+4. **(Optional) Deploy to Kubernetes** 
 
-## 1. Training a Model
+### Step 2: Training a model via yaml 
 
-Training a model involves preparing your environment, configuring the training parameters, preparing the data, executing the training script, and verifying the trained model.
+5. **Training a model**
+    ```bash
+    python model_training.py --config config.yaml
+    ```
+ 
+6.  **Run the Docker Container**
 
-### Step 1: Setup the Environment
-
-1. **Clone the Repository**
-
-   If you haven't already, clone the project repository:
-
+Run the Docker container, mapping the container's port to a port on   your host machine:
    ```bash
-   git clone https://github.com/yourusername/ml-framework-k8s.git
-   cd ml-framework-k8s
+   docker run --privileged -p 8000:8000 ml-framework:latest
+   ```
+
+### Usage Accessing the /predict Endpoint 
+
+    ```bash
+     curl -X POST "http://localhost:8000/predict/" \
+	 -H "Content-Type: application/json" \
+	 -d '{"ids": [199, 147]}'
+	```
+
 
