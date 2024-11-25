@@ -1,0 +1,32 @@
+# Core Libraries
+numpy==1.23.5
+pandas==1.5.3
+scikit-learn==1.2.2
+
+#scikit-learn==0.22.1
+#tensorflow==2.4.1
+#pandas==1.0.1
+#numpy==1.18.1
+
+# TensorFlow for Model Training
+
+tensorflow==2.13.0
+
+# Hugging Face for Feature Extraction
+transformers==4.33.0
+
+# FastAPI for API Development
+fastapi==0.95.2
+uvicorn==0.23.2
+
+# Prometheus Client for Metrics
+prometheus-client==0.16.0
+
+# Pydantic for Input Validation
+pydantic==1.10.12
+
+# Testing Libraries
+pytest==7.4.2
+
+# Linting Libraries
+flake8==6.1.0

@@ -1,0 +1,9 @@
+model:
+  name: logistic_regression
+  params:
+    penalty: l2
+    C: 1.0
+    solver: lbfgs
+
+preprocessor:
+  params: {}

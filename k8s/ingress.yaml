@@ -1,0 +1,17 @@
+# k8s/ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ml-framework-ingress
+spec:
+  rules:
+  - host: ml-framework.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: ml-framework-service
+            port:
+              number: 80
