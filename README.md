@@ -102,13 +102,15 @@ docker build -t ml-framework-api .
 ```
 4. **(Optional) Deploy to Kubernetes** 
 
-### Step 2: Training a model via yaml 
 
 5. **Training a model**
     ```bash
     python model_training.py --config config.yaml
     ```
  
+
+## 2. Usage Accessing the /predict Endpoint 
+
 6.  **Run the Docker Container**
 
 Run the Docker container, mapping the container's port to a port on   your host machine:
@@ -116,7 +118,6 @@ Run the Docker container, mapping the container's port to a port on   your host 
    docker run --privileged -p 8000:8000 ml-framework:latest
    ```
 
-### Usage Accessing the /predict Endpoint 
 
     ```bash
      curl -X POST "http://localhost:8000/predict/" \
