@@ -147,7 +147,7 @@ Training a model involves preparing your environment, configuring the training p
 	-d '{"ids": [199, 147]}'
 	``` 
 ## Troubleshooting
-Error: ModuleNotFoundError: No module named 'data'
+1. Error: ModuleNotFoundError: No module named 'data'
 
 Cause: Python cannot locate the data module due to incorrect project structure or Python path.
 
@@ -155,3 +155,13 @@ Solution:
 
 Ensure data/ directory exists and contains an __init__.py file.
 Verify you're running the script from the project root.
+
+2. Insufficient Resources
+
+Cause: Docker container lacks sufficient memory or CPU resources.
+
+Solution:
+
+Allocate more resources to Docker (Docker Desktop settings).
+Limit the number of threads used by the model to reduce resource consumption.
+docker run with the --privileged flag.
